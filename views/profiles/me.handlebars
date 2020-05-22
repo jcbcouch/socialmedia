@@ -1,0 +1,10 @@
+ {{#if profile}}
+ <div class="card card-body mb-2">
+    <h4>{{profile.handle}}</h4> 
+    <p>{{profile.status}}</p>
+    {{!-- <p><a href="/profiles/follow/{{profile.user}}">follow</a></p> --}}
+  </div>
+  <textarea>tell these people what you think</textarea>
+{{else}}
+  <p>something went wrong</p>
+{{/if}}

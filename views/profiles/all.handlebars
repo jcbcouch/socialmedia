@@ -1,0 +1,9 @@
+
+  <div class="card card-body mb-2">
+    {{#each profiles}}
+    <h4>{{handle}}</h4>
+    <p><a href="/profiles/getprofile/{{user}}">profile</a></p>
+    
+{{else}}
+  <p>No video ideas listed</p>
+{{/each}}

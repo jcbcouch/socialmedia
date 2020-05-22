@@ -1,0 +1,55 @@
+
+
+<p>how close?</p>
+<select id="distance">
+  <option selected >select a distance</option>
+  <option value="10">10 mile radius</option>
+  <option value="50">50 mile radius</option>
+  <option value="100">100 mile radius</option>
+  <option value="300">300 mile radius</option>
+</select>
+
+
+  <div class="card card-body mb-2">
+      {{#each profiles}}
+    <h4>{{handle}}</h4> <p>{{distance}} miles from me</p>
+    <p><a href="/profiles/getprofile/{{user}}">profile</a></p>
+    
+{{else}}
+  <p>No profiles</p>
+{{/each}}
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    if (navigator.geolocation) {
+    let position = navigator.geolocation.getCurrentPosition(savePosition);
+  } 
+
+function savePosition(position) {
+
+  let data = {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+  }
+
+  fetch('/location/updatelocation', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(data => console.log(data))
+}
+
+let distance = document.getElementById("distance");
+distance.addEventListener("change", (e) => {
+    let value = distance.value;
+    location.replace(`/location/nearby/?radius=${value}`);
+})
+})
+  
+</script>
+
